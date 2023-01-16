@@ -1,0 +1,64 @@
+ {% extends 'base.html' %}
+ {% block title %} UPLOAD {%endblock%}
+    {%block content %}
+    <div class="row">
+        <div class="col-md-8">
+          <h1>
+            <strong>SEJA BEM VINDA <br/> System Entity</strong>
+          </h1>
+          <p class="text-muted h4">
+            <!-- Lorem, ipsum dolor sit amet consectetur adipisicing elit. Totam dolores, magni facere, eligendi alias ducimus exercitationem quas aliquam non asperiores esse veniam reiciendis maiores in earum inventore itaque provident dignissimos. -->
+          </p>
+          <form id="form_data" method="POST" action="{{url_for('upload.home')}}" enctype="multipart/form-data">
+          <div class="d-grid gab-2">
+
+            <input type="file" name='first_files' href='#'class="form-control file-primary py-8 mb-4 mx-8" multiple="true">
+            <input type="file" href='#'class="form-control file-secondary py-8 mb-4 mx-8" multiple="true">
+            <span class="glyphicon glyphicon-remove"></span>
+            <input type="file" href="{{url_for('index')}}"  multiple="true" class="form-control file-secondary py-8 mb-4 mx-8">
+            <button id="submit" type="submit" class="btn btn-secondary mt-8" value="send">Salvar</button>
+          </div>
+          
+        </form>
+        <div class="col md-4">
+          <button class="form-control mt-4 " id='add-controll'>+</button>
+          <button href="/files" class="btn btn-outline-secondary btn-lg px-5 py-2" >Take Picture</button>          
+        </div>
+      
+        </div>
+
+        <script>
+
+          var btn=document.getElementById('add-controll')
+          var form=document.getElementById('form_data')
+          var btn_submit=document.getElementById('submit')
+
+          function alertar(mesage,type){
+
+            var error=document.createElement('div')
+            error.innerHTML="<div class='alert alert-'"+type+" alert-dismissible role='alert'>"+mesage+"</div>"
+            form.append(error)
+          }
+
+          btn.addEventListener('click',(event)=>{
+            event.preventDefault()
+            console.log(btn_submit)
+            try{
+              form.removeChild(btn_submit) 
+
+              var input=document.createElement('input')
+              input.type='file'
+              input.class="form-control file-secondary py-8 mb-4 mx-8"
+              input.setAttribute('class','form-control file-secondary py-8 mb-4 mx-8')
+              input.href="{{url_for('index')}}"
+              form.appendChild(input)
+              console.log('ADDED INPUT FILE')
+            }catch(e){
+              alertar("FALHOU $e",'danger')
+
+            }
+            
+
+          })
+        </script>
+{%endblock%}
